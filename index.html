@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="question">
+            <h1></h1>
+            <p></p>
+        </div>
+        <div class="options"></div>
+        <button id="nextButton">Next</button>
+        <div class="score">
+            <span id="questionNumber">1</span>/<span id="totalQuestions">10</span> | <span id="score">0</span>
+            
+            <button id="playAgainButton">
+                <i class="fas fa-redo-alt"></i> Play Again
+            </button>
+            <button id="darkModeToggle">Toggle Dark Mode</button>
+        </div>
+    </div>
+    <script>
+        const questions = [
+    {
+        question: "What is the main goal of cybersecurity?",
+        options: [
+            "Protecting data from unauthorized access",
+            "Enhancing network speed",
+            "Creating complex passwords",
+            "Detecting viruses"
+        ],
+        correctAnswer: 0,
+    },
+    {
+        question: "What is the largest planet in our solar system?",
+        options: ["Earth", "Venus", "Jupiter", "Mars"],
+        correctAnswer: 2,
+    },
+    {
+        question: 'What does the acronym "VPN" stand for in the context of computer networking?',
+        options: [
+            "Virtual Private Network",
+            "Very Private Network",
+            "Virtual Public Network",
+            "Virtual Personal Network"
+        ],
+        correctAnswer: 0,
+    },
+    {
+        question: "Which encryption algorithm is commonly used to secure data transmission over the internet?",
+        options: ["AES", "DES", "RSA", "SHA"],
+        correctAnswer: 0,
+    },
+    {
+        question: "What is the term for software that is designed to block unauthorized access to a computer system or network?",
+        options: ["Firewall", "Antivirus", "Malware", "Router"],
+        correctAnswer: 0,
+    },
+    {
+        question: "Which technology allows multiple virtual operating systems to run on a single physical host?",
+        options: ["Virtualization", "Encryption", "Cloud Computing", "Router"],
+        correctAnswer: 0,
+    },
+    {
+        question: "What type of cyberattack involves malicious software that encrypts a victim's data and demands a ransom for decryption?",
+        options: ["Phishing", "DDoS", "Ransomware", "Spyware"],
+        correctAnswer: 2,
+    },
+    {
+        question: "Which IT certification is known for validating expertise in network security and related topics?",
+        options: [
+            "CompTIA A+",
+            "Cisco CCNA",
+            "Certified Information Systems Security Professional (CISSP)",
+            "Microsoft Certified Azure Administrator"
+        ],
+        correctAnswer: 2,
+    },
+    {
+        question: "What is the primary function of an operating system?",
+        options: ["Managing hardware resources", "Sending emails", "Playing games", "Creating documents"],
+        correctAnswer: 0,
+    },
+    {
+        question: "Which programming language is often used for web development and is known for its simplicity and readability?",
+        options: ["Python", "Java", "C++", "Ruby"],
+        correctAnswer: 0,
+    },
+    {
+        question: "What does CPU stand for in computing?",
+        options: ["Central Processing Unit", "Computer Peripheral Unit", "Central Power Unit", "Control Processing Unit"],
+        correctAnswer: 0,
+    },
+    {
+        question: "Which of the following is NOT a type of cloud service model?",
+        options: ["Infrastructure as a Service (IaaS)", "Platform as a Service (PaaS)", "Software as a Service (SaaS)", "Computer as a Service (CaaS)"],
+        correctAnswer: 3,
+    },
+    {
+        question: "What is the purpose of a firewall in network security?",
+        options: ["To block all incoming and outgoing network traffic", "To monitor network traffic and prevent unauthorized access", "To boost network speed", "To encrypt all network data"],
+        correctAnswer: 1,
+    },
+    {
+        question: "What is the purpose of a 'traceroute' command in networking?",
+        options: [
+            "To identify the geographical location of a website",
+            "To trace the path that packets take from your computer to a destination",
+            "To encrypt network traffic",
+            "To hide your online identity"
+        ],
+        correctAnswer: 1,
+    },
+    {
+        question: "Which programming language is often used for artificial intelligence and machine learning?",
+        options: ["JavaScript", "Python", "C#", "Swift"],
+        correctAnswer: 1,
+    },
+    {
+        question: "What is 'SQL injection' in the context of cybersecurity?",
+        options: [
+            "A method for improving SQL database performance",
+            "A technique for injecting malicious code into a database query",
+            "A secure way to access SQL databases",
+            "A type of database encryption"
+        ],
+        correctAnswer: 1,
+    },
+    {
+        question: "Which protocol is used for secure communication over the web, often indicated by 'https://' in URLs?",
+        options: ["HTTP", "SMTP", "FTP", "HTTPS"],
+        correctAnswer: 3,
+    },
+    {
+        question: "What is the primary purpose of a 'packet sniffer' in network security?",
+        options: [
+            "To analyze and capture network traffic for troubleshooting",
+            "To create secure virtual private networks (VPNs)",
+            "To block all network traffic",
+            "To optimize network speed"
+        ],
+        correctAnswer: 0,
+    },
+    {
+        question: "Which of the following is a common authentication factor used in cybersecurity?",
+        options: ["Something you know", "Something you breathe", "Something you smell", "Something you taste"],
+        correctAnswer: 0,
+    },
+    {
+        question: "What is the 'Dark Web' in the context of the internet?",
+        options: [
+            "A region of the internet that requires special goggles to access",
+            "A part of the internet that is intentionally hidden and not indexed by search engines",
+            "A website design style with dark colors and backgrounds",
+            "A virtual reality-based web browsing experience"
+        ],
+        correctAnswer: 1,
+    },
+    {
+        question: "Which type of cyberattack involves overwhelming a target system or network with excessive traffic, causing it to become slow or unavailable?",
+        options: ["Phishing", "DDoS", "Ransomware", "Spyware"],
+        correctAnswer: 1,
+    },
+    {
+        question: "What is the primary purpose of a 'sandbox' in cybersecurity?",
+        options: [
+            "To build sandcastles",
+            "To isolate and execute untrusted code in a controlled environment",
+            "To secure physical servers",
+            "To protect against browser vulnerabilities"
+        ],
+        correctAnswer: 1,
+    },
+    {
+        question: "Which organization develops and maintains the open-source Linux operating system?",
+        options: ["Microsoft", "Apple", "Google", "The Linux Foundation"],
+        correctAnswer: 3,
+    },
+    {
+        question: "What is the primary purpose of a honeypot in cybersecurity?",
+        options: ["To attract and monitor attackers", "To encrypt sensitive data", "To enhance network speed", "To block all network traffic"],
+        correctAnswer: 0,
+    },
+    {
+        question: "Which cryptographic algorithm is primarily used for digital signatures and public-key cryptography?",
+        options: ["AES", "DES", "RSA", "SHA"],
+        correctAnswer: 2,
+    },
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let darkMode = false;
+
+        const bodyElement = document.body;
+        const quizContainer = document.querySelector(".quiz-container");
+        const questionTitleElement = document.querySelector(".question h1");
+        const questionTextElement = document.querySelector(".question p");
+        const optionsElement = document.querySelector(".options");
+        const nextButton = document.getElementById("nextButton");
+        const questionNumberElement = document.getElementById("questionNumber");
+        const totalQuestionsElement = document.getElementById("totalQuestions");
+        const scoreValueElement = document.getElementById("score");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+
+        function displayQuestion() {
+            if (currentQuestionIndex < questions.length) {
+                const currentQuestion = questions[currentQuestionIndex];
+                questionTitleElement.textContent = `Question ${currentQuestionIndex + 1}:`;
+                questionTextElement.textContent = currentQuestion.question;
+                optionsElement.innerHTML = "";
+
+                currentQuestion.options.forEach((option, index) => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.dataset.index = index;
+                    optionsElement.appendChild(button);
+                    button.addEventListener("click", checkAnswer);
+                });
+
+                questionNumberElement.textContent = currentQuestionIndex + 1;
+                totalQuestionsElement.textContent = questions.length;
+            } else {
+                endQuiz();
+            }
+        }
+
+        function checkAnswer(event) {
+            const selectedAnswerIndex = parseInt(event.target.dataset.index);
+
+            if (selectedAnswerIndex === questions[currentQuestionIndex].correctAnswer) {
+                event.target.style.backgroundColor = "green";
+                score++;
+            } else {
+                event.target.style.backgroundColor = "red";
+            }
+
+            currentQuestionIndex++;
+            setTimeout(() => {
+                event.target.style.backgroundColor = ""; 
+                displayQuestion();
+            }, 1000);
+            scoreValueElement.textContent = score;
+        }
+
+        function toggleDarkMode() {
+            darkMode = !darkMode;
+            if (darkMode) {
+                bodyElement.classList.add("dark-mode");
+            } else {
+                bodyElement.classList.remove("dark-mode");
+            }
+        }
+
+        function playAgain() {
+            currentQuestionIndex = 0;
+            score = 0;
+            scoreValueElement.textContent = score;
+            displayQuestion();
+            optionsElement.innerHTML = "";
+        }
+
+        function endQuiz() {
+            alert(`Quiz completed! Your score is ${score}/${questions.length}`);
+        }
+
+        nextButton.addEventListener("click", displayQuestion);
+        darkModeToggle.addEventListener("click", toggleDarkMode);
+        const playAgainButton = document.getElementById("playAgainButton");
+        playAgainButton.addEventListener("click", playAgain);
+
+        displayQuestion();
+    </script>
+</body>
+</html>
